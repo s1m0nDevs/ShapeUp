@@ -9,6 +9,34 @@ document.addEventListener("DOMContentLoaded", () => {
   scrollHeader()
 });
 
+window.addEventListener('beforeunload', (e)=>{window.scroll(0,0);})
+
+
+// Nav responsive start
+let menuRight = document.querySelector('.header nav.menu').parentElement
+
+document.querySelector('.menu-toggler-grid .navbar').addEventListener('click',(e)=>{
+  console.log('121')
+  if (menuRight.className.indexOf('opened') != -1)
+  {
+    menuRight.classList.remove('opened');
+    menuRight.classList.add('dnone');
+  }
+  else
+  {
+    menuRight.classList.add('opened');
+    menuRight.classList.remove('dnone');
+  }
+});
+
+document.querySelectorAll('nav li').forEach(s=>{
+  s.addEventListener('click', event => {
+     menuRight.classList.remove('opened');
+     menuRight.classList.add('dnone');
+  })
+});
+// Nav responsive end
+
 document.querySelectorAll('nav li').forEach(s=>{
   s.addEventListener('click', event => {
     event.preventDefault();
@@ -34,13 +62,11 @@ var bodyRect = document.body.getBoundingClientRect(),
   outPutValue = [],
   heightSections = [],
   numSec = 0;
-  console.log(navLis)
 
 for (var i = 0; i < navLis.length; i++)
 {
   outPutValue[i] = navLis[i].dataset.value;
   heightSections[i] = document.querySelector(`section[data-value='${outPutValue[i]}']`).getBoundingClientRect().top - bodyRect.top-115;
-  console.log(heightSections[i])
 }
 // Nav header get info end
 
